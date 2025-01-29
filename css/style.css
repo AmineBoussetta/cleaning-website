@@ -270,7 +270,7 @@ textarea.input-control{
     align-items: center;
     justify-content: center;
     text-align: center; /* Centers text inside */
-    background-image: url('/img/home.jpg'); /* Background image */
+    background-image: url('../img/home.jpg'); /* Background image */
     background-size: cover; /* Ensures the image covers the entire section */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling */
@@ -419,17 +419,23 @@ textarea.input-control{
     position: relative;
     overflow: hidden;
     width: 100%;
+    min-height: 500px; /* Gardez cette valeur comme hauteur minimale */
+    height: 500px;
 }
 
 .carousel-slide {
-    display: none; /* Masque les slides par défaut */
+    position: absolute;
     width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s;
 }
 
 
 .carousel-slide.active {
-    display: block;
+    position: relative;
     opacity: 1;
+    visibility: visible;
 }
 
 .carousel .grid {
@@ -442,11 +448,18 @@ textarea.input-control{
 }
 
 .carousel-nav {
-    text-align: center;
-    margin-top: 20px;
+    position: absolute; /* Changé */
+    bottom: 20px; /* Position en bas */
+    left: 50%; /* Centrage horizontal */
+    transform: translateX(-50%); /* Centrage précis */
+    z-index: 10; /* Assure que les boutons sont au-dessus */
+    display: flex; /* Pour aligner les boutons côte à côte */
+    gap: 20px;
+    pointer-events: none
 }
 
 .carousel-nav button {
+    pointer-events: auto;
     background-color: var(--main-color);
     color: var(--text-white);
     border: none;
@@ -576,3 +589,56 @@ textarea.input-control{
 }
 
 /* responsive */
+@media (max-width: 991px) {
+    /* Menu mobile */
+    .nav-toggler {
+        display: block;
+        z-index: 3;
+    }
+
+    .nav {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        right: -100%;
+        top: 0;
+        background: var(--bg-white);
+        padding-top: 80px;
+        transition: 0.5s ease;
+    }
+
+    .nav.active {
+        right: 0;
+    }
+
+    /* Adaptations générales */
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .about-img,
+    .about-text {
+        grid-column: span 12;
+    }
+
+    /* Spécialités */
+    .specialty-item {
+        grid-column: span 12;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-text h1 {
+        font-size: 2rem;
+    }
+
+    .contact-info {
+        grid-column: span 12;
+        margin-bottom: 40px;
+    }
+
+    .contact-form {
+        grid-column: span 12;
+    }
+}
