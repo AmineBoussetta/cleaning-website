@@ -216,21 +216,14 @@ textarea.input-control{
     left: 0;
     top: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
     padding: 10px, 0;
+    background-color: var(--bg-color); /* Set background to white */
+    box-shadow: var(--shadow); /* Add a subtle shadow for depth */
+    transition: background-color 0.3s ease;
 }
 .header::before{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: var(--bg-color);
-    box-shadow: var(--shadow);
-    z-index: -1;
-    transform: translateY(calc(-100% -  10px));
-    transition: transform 0.5s ease;
+    display: none;
 
 }
 .header.bg-reveal::before{
@@ -259,13 +252,9 @@ textarea.input-control{
     margin-left: 35px;
 }
 .nav a{
+    color: var(--text-x-dark-gray); /* Ensure text is visible on a white background */
+    font-weight: 500;
     text-transform: capitalize;
-    font-size: var(--fs-md);
-    color: var(--text-x-dark-gray);
-    font-weight: 400;
-    display: block;
-    padding: 10px 0;
-    transition: color 0.3s ease;
 }
 .nav a:hover{
     color: var(--main-color);
@@ -275,48 +264,71 @@ textarea.input-control{
 }
 
 /* home */
-.home{
-    padding: 100px 0 60px;
+.home {
+    padding: 100px 0; /* Space for content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Centers text inside */
+    background-image: url('/img/home.jpg'); /* Background image */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: 100vh; /* Full-screen height */
+    position: relative; /* For overlay effects */
+    color: var(--bg-color); /* Makes text readable on dark backgrounds */
 }
-.home-text,
-.home-img{
-    grid-column: span 6;
-    align-self: center;
+
+/* Add a semi-transparent overlay to darken the image for better text contrast */
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1; /* Places it below text */
 }
-.home-text h1{
+
+/* Ensure the text is above the overlay */
+.home .container {
+    position: relative;
+    z-index: 2;
+}
+
+.home-text h1 {
     font-size: var(--fs-4xl);
     margin: 0 0 20px;
     text-transform: capitalize;
+    color: white;
 }
-.home-text p{
-    margin-bottom: 0 0 30px;
+
+.home-text p {
+    margin-bottom: 20px;
+    color: white; /* Ensure contrast */
 }
-.home-img{
-    position: relative;
-}
-.home-img .circle-wrap{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: -1;
-}
-.home-img .circle{
-    height: 350px;
-    width: 350px;
+
+.btn {
     background-color: var(--main-color);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    font-size: var(--fs-md);
+    transition: background-color 0.3s ease;
 }
-.home-img img{
-    max-width: 345px;
-    display: block;
-    margin: auto;
-    margin-bottom: 200px; /* Added */
-    margin-right: 100px; /* Added */
-    border-radius: 35%; /* Added */
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--main-color);
 }
 
 /* about */
+.about {
+    margin-top: 80px; /* Adds more space above the about section */
+    padding: 60px 0; /* Keeps the current padding for the content */
+}
 .about .section-title{
     text-align: left;
     margin: 0 0 15px;
@@ -370,8 +382,10 @@ textarea.input-control{
 
 /* services */
 .services-item{
-    grid-column: span 3;
+    flex: 0 0 auto; /* Empêche les éléments de rétrécir */
+    width: 250px; /* Largeur fixe pour chaque service (ajustez selon vos besoins) */
     text-align: center;
+    grid-column: span 4;
 }
 .services-item .img-box{
     height: 140px;
@@ -381,118 +395,75 @@ textarea.input-control{
     box-shadow: var(--shadow);
     background-color: var(--bg-color);
     padding: 8px;
+    display: flex; /* Centers image */
+    align-items: center;
+    justify-content: center;
 }
 .services-item .img-box img{
     border-radius: 50%;
+    width: 100%; /* Fill the container */
+    height: 100%; /* Maintain the aspect ratio */
+    object-fit: cover; /* Ensure the image covers the circle properly */
     transition: transform 0.5s ease;
 }
 .services-item:hover .img-box img{
-    transform: scale(1.5);
+    transform: scale(1.1);
 }
 .services-item h3{
     text-transform: capitalize;
     font-size: var(--fs-xl);
     font-weight: 500;
 }
-/* pricing */
-.pricing-item{
-    grid-column: span 4;
-    padding: 30px;
-    background-color: var(--bg-color);
-    box-shadow: var(--shadow);
-    border-radius: 10px;
-    text-align: center;
+/* Carousel base */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
 }
-.pricing-header h3{
-    text-transform: capitalize;
-    margin: 0 0 20px;
-    font-size: var(--fs-2xl);
-    font-weight: 600;
+
+.carousel-slide {
+    display: none; /* Masque les slides par défaut */
+    width: 100%;
 }
-.pricing-header .price{
-    height: 140px;
-    width: 140px;
-    box-shadow: inset var(--shadow);
-    display: flex;
-    margin: auto;
-    flex-direction: column;
-    align-items: center;
+
+
+.carousel-slide.active {
+    display: block;
+    opacity: 1;
+}
+
+.carousel .grid {
+    display: flex; /* Utilise Flexbox pour aligner les services horizontalement */
     justify-content: center;
-    font-size: var(--fs-sm);
-    text-transform: capitalize;
-    border-radius: 50%;
+    gap: 30px; /* Espacement entre les services */
+    max-width: 1200px; /* Ajustez selon vos besoins */
+    margin: 0 auto; /* Centre le conteneur */
+    overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
 }
-.pricing-header .price span{
-    font-size: var(--fs-3xl);
-    color: var(--main-color);
-    font-weight: bold;
-    line-height: 1.3;
-}
-.pricing-body{
-    padding: 30px 0;
-    text-align: left;
-}
-.pricing-body li{
-    text-transform: capitalize;
-    position: relative;
-    padding-left: 30px;
-    padding-left: 27px;
-}
-.pricing-body li+li{
-    margin-top: 10px;
-}
-.pricing-body li i{
-    padding: absolute;
-    left: 0;
-    top: 5px;
-    font-size: var(--fs-sm);
-}
-/* team */
-.team-item{
-    grid-column: span 4;
+
+.carousel-nav {
     text-align: center;
+    margin-top: 20px;
 }
-.team-item .img-box{
-    max-width: 350px;
-    box-shadow: var(--shadow);
-    background-color: var(--bg-color);
-    margin: auto;
-    border-radius: 50%;
-    padding: 15px;
-}
-.team-item img{
-    border-radius: 50%;
-    transition: filter 0.5s ease;
-}
-.team-item:hover img{
-    filter: grayscale(50%);
-}
-.team-item .detail{
+
+.carousel-nav button {
     background-color: var(--main-color);
-    width: 85%;
-    max-width: 260px;
-    padding: 15px;
-    margin: -42px auto 0;
-    text-align: auto;
-    text-transform: capitalize;
-    position: relative;
-    z-index: 1;
-    border-radius: 0 40px;
-    transition: border-radius 0.5s ease;
-}
-.team-item:hover .detail{
-    border-radius: 40px 0;
-}
-.team-item h3{
-    margin: 0 0 5px;
     color: var(--text-white);
-    font-size: var(--fs-xl);
-    font-weight: 500;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: var(--fs-md);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-.team-item p{
-    margin: 0;
-    color: var(--text-light-gray);
+
+.carousel-nav button:hover {
+    background-color: hsl(var(--hue), var(--saturation), 40%);
 }
+
+/* team */
+
 /* contact */
 .contact-grid{
     max-width: 1000px;
