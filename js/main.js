@@ -54,3 +54,37 @@ const carousel = () => {
 
 // Initialiser le carrousel au chargement
 document.addEventListener('DOMContentLoaded', carousel);
+
+//mail form
+    document.getElementById('my-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const status = document.getElementById('form-status');
+        const button = form.querySelector('button[type="submit"]');
+
+        button.disabled = true;
+        status.style.display = 'block';
+        status.innerHTML = 'Envoi en cours...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                status.innerHTML = 'Message envoyé avec succès ! Nous vous répondrons bientôt.';
+                form.reset(); // Reset form fields
+            } else {
+                status.innerHTML = "Une erreur s'est produite. Veuillez réessayer.";
+            }
+        } catch (error) {
+            status.innerHTML = "Problème de connexion. Vérifiez votre internet.";
+        }
+
+        button.disabled = false;
+        setTimeout(() => { status.style.display = 'none'; }, 5000);
+    });
+

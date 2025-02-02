@@ -232,12 +232,13 @@
                             <div class="contact-info-item">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <h3>Adresse</h3>
-                                <p>xxxx</p>
+                                <p>8876 Boul. Henri-Bourassa #100, Québec, QC G1G 3W9</p>
                             </div>
                             <div class="contact-info-item">
                                 <i class="fas fa-phone"></i>
                                 <h3>Appelez-nous</h3>
-                                <p>(514) xxx-xxxx</p>
+                                <p>4185615415</p>
+                                <p>5817773133</p>
                             </div>
                             <div class="contact-info-item">
                                 <i class="fas fa-envelope"></i>
@@ -250,25 +251,33 @@
                         </div>
                     </div>
                     <div class="contact-form">
-                        <form action="/cleaning-website/send_email.php" method="POST">
+                        <form action="https://formspree.io/f/xdkaznkk" method="POST" class="contact-form" id="my-form">
+                            <!-- Champ anti-spam caché -->
+                            <div style="display: none;">
+                                <input type="text" name="_gotcha">
+                            </div>
+                            <input type="hidden" name="_subject" value="Nouveau message depuis le site web">
                             <div class="input-box">
-                                <input type="text" name="name" placeholder="Nom et Prénom" class="input-control"
+                                <input type="text" name="Nom" placeholder="Nom et Prénom" class="input-control"
                                     required>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="email" placeholder="Email" class="input-control" required>
+                                <input type="email" name="Email" placeholder="Email" class="input-control" required>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="phone" placeholder="Télephone" class="input-control" required>
+                                <input type="tel" name="Téléphone" placeholder="Téléphone" class="input-control"
+                                    required>
                             </div>
                             <div class="input-box">
-                                <textarea name="message" placeholder="message" class="input-control"
+                                <textarea name="Message" placeholder="Message" class="input-control"
                                     required></textarea>
                             </div>
                             <div class="btn-wrap">
                                 <button type="submit" class="btn">Envoyer le message</button>
                             </div>
                         </form>
+
+                        <div id="form-status" style="display: none;"></div>
                     </div>
                 </div>
             </div>
@@ -292,7 +301,44 @@
 
 
     <script src="js/main.js"></script>
+
     <script src="https://kit.fontawesome.com/bf14b68fbc.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Gestion de la soumission du formulaire
+        document.getElementById('my-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            const status = document.getElementById('form-status');
+            const button = form.querySelector('button[type="submit"]');
+
+            button.disabled = true;
+            status.style.display = 'block';
+            status.innerHTML = 'Envoi en cours...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    status.innerHTML = 'Message envoyé avec succès !';
+                    form.reset();
+                } else {
+                    status.innerHTML = "Une erreur s'est produite. Veuillez réessayer.";
+                }
+            } catch (error) {
+                status.innerHTML = "Problème de connexion. Vérifiez votre internet.";
+            }
+
+            button.disabled = false;
+            setTimeout(() => { status.style.display = 'none'; }, 5000);
+        });
+    </script>
+
 </body>
 
 </html>

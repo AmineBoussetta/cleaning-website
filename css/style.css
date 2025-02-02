@@ -216,7 +216,7 @@ textarea.input-control{
     left: 0;
     top: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 99999;
     padding: 10px, 0;
     background-color: var(--bg-color); /* Set background to white */
     box-shadow: var(--shadow); /* Add a subtle shadow for depth */
@@ -449,7 +449,7 @@ textarea.input-control{
 
 .carousel-nav {
     position: absolute; /* Changé */
-    bottom: 20px; /* Position en bas */
+    bottom: 40px; /* Position en bas */
     left: 50%; /* Centrage horizontal */
     transform: translateX(-50%); /* Centrage précis */
     z-index: 10; /* Assure que les boutons sont au-dessus */
@@ -522,6 +522,24 @@ textarea.input-control{
 }
 .contact-info-item p:last-child{
     margin: 0;
+}
+
+
+#form-status {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#form-status[style*="display: block"] {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#form-status[style*="display: block"]:not(:empty) {
+    display: block !important;
 }
 /* footer */
 .footer{
