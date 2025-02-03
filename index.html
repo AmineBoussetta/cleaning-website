@@ -22,12 +22,12 @@
     <!-- page wrapper start -->
     <div class="page-wrapper">
         <!-- header start -->
-        <header class="header js-header">
+        <header class="header js-header" role="banner">
             <div class="container">
                 <div class="logo">
-                    <img src="img/logo-mehdi.png" alt="cleaning service logo">
+                    <img src="img/logo-mehdi.png" alt="cleaning service logo" loading="lazy">
                 </div>
-                <button type="button" class="nav-toggler js-nav-toggler">
+                <button type="button" class="nav-toggler js-nav-toggler" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
                 </button>
                 <nav class="nav js-nav">
@@ -36,7 +36,7 @@
                         <li><a href="#about">À propos</a></li>
                         <li><a href="#specialty">Expertises</a></li>
                         <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#contact">Réservation & Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -45,7 +45,7 @@
 
 
         <!-- home section start -->
-        <section class="home" id="home">
+        <section class="home" id="home" aria-label="Accueil">
             <div class="container">
                 <div class="home-text">
                     <h1>Des solutions de nettoyage adaptées aux grandes entreprises</h1>
@@ -63,13 +63,15 @@
         <!-- home section end -->
 
         <!-- about section start -->
-        <section class="about section-padding" id="about">
+        <section class="about section-padding" id="about" aria-label="À propos">
             <div class="container">
                 <div class="grid">
                     <div class="about-img">
                         <div class="img-box">
-                            <img src="img/about-img.png" alt="img">
-                            <div class="box box-l">
+                            <!-- Changed: Better alt text and loading attribute -->
+                            <img src="img/about-img.png" alt="Notre équipe de nettoyage au travail" loading="lazy"
+                                width="400" height="400">
+                            <div class="box box-l" aria-label="Statistiques clients">
                                 <span>2.5k</span>
                                 <p>clients satisfaits</p>
                             </div>
@@ -80,14 +82,11 @@
                             <span class="title">à propos</span>
                             <h2 class="sub-title">Nous sommes en service depuis 2010</h2>
                         </div>
-                        <p>Depuis plus de 10 ans, nous sommes experts dans l'entretien des grandes entreprises : centres
+                        <p>Depuis plus de 10 ans, nous sommes experts dans l'entretien des grandes entreprises : centres
                             commerciaux, usines, épiceries, et bien plus. Notre mission est de garantir un environnement
                             propre et accueillant pour vos clients et employés.</p>
                         <p>Nous utilisons des équipements modernes pour offrir un nettoyage efficace et respectueux des
                             normes environnementales.</p>
-
-
-
                     </div>
                 </div>
             </div>
@@ -105,7 +104,7 @@
                     <!-- specialty item start -->
                     <div class="specialty-item">
                         <div class="img-box">
-                            <img src="img/office.jpg" alt="office cleaning">
+                            <img src="img/office.jpg" alt="office cleaning" loading="lazy">
                         </div>
                         <h3>bureaux</h3>
                     </div>
@@ -113,7 +112,7 @@
                     <!-- specialty item start -->
                     <div class="specialty-item">
                         <div class="img-box">
-                            <img src="img/commercial.jpg" alt="commercial cleaning">
+                            <img src="img/commercial.jpg" alt="commercial cleaning" loading="lazy">
                         </div>
                         <h3>commercial</h3>
                     </div>
@@ -121,7 +120,7 @@
                     <!-- specialty item start -->
                     <div class="specialty-item">
                         <div class="img-box">
-                            <img src="img/residential.jpg" alt="residential cleaning">
+                            <img src="img/residential.jpg" alt="residential cleaning" loading="lazy">
                         </div>
                         <h3>résidentiel</h3>
                     </div>
@@ -132,131 +131,125 @@
         <!-- specialty section end -->
 
         <!-- services section start -->
-        <!-- services section start -->
-        <section class="services section-padding" id="services">
-            <div class="carousel">
+        <section class="services section-padding" id="services" aria-label="Nos services">
+            <div class="carousel" role="region" aria-label="Carrousel des services">
                 <div class="section-title">
                     <span class="title">services</span>
                     <h2 class="sub-title">nos services</h2>
                 </div>
 
                 <!-- Slide 1 -->
-                <div class="carousel-slide active">
-                    <div class="grid">
-                        <div class="services-item">
+                <div class="carousel-container">
+                    <div class="carousel-slide active" role="group" aria-label="1 of 2">
+                        <div class="grid">
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/regular-cleaning.jpg" alt="Entretien ménager régulier">
+                                <img src="img/service/regular-cleaning.jpg" alt="Service d'entretien ménager régulier"
+                                    loading="lazy" width="140" height="140">
                             </div>
                             <h3>Entretien ménager régulier</h3>
-                        </div>
-                        <div class="services-item">
+                        </article>
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/window-cleaning.jpg" alt="Lavage de vitres">
+                                <img src="img/service/window-cleaning.jpg" alt="Lavage de vitres" loading="lazy" width="140" height="140">
                             </div>
                             <h3>Lavage de vitres</h3>
-                        </div>
-                        <div class="services-item">
+                        </article>
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/parking-cleaning.jpg" alt="Nettoyage de parkings">
+                                <img src="img/service/parking-cleaning.jpg" alt="Nettoyage de parkings" loading="lazy" width="140" height="140">
                             </div>
                             <h3>Nettoyage de parkings</h3>
-                        </div>
-                        <div class="services-item">
+                        </article>
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/carpet-cleaning.jpg" alt="Lavage de tapis">
+                                <img src="img/service/carpet-cleaning.jpg" alt="Lavage de tapis" loading="lazy"width="140" height="140">
                             </div>
                             <h3>Lavage de tapis</h3>
-                        </div>
+                        </article>
                     </div>
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="carousel-slide">
+                <div class="carousel-slide" role="group" aria-label="2 of 2">
                     <div class="grid">
-                        <div class="services-item">
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/decapage-serrage.jpg" alt="Décapage et cirage">
+                                <img src="img/service/decapage-serrage.jpg" alt="Décapage et cirage" loading="lazy" width="140" height="140">
                             </div>
                             <h3>Décapage et cirage</h3>
-                        </div>
-                        <div class="services-item">
+                        </article>
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/commercial-cleaning.jpg" alt="Entretien commercial complet">
+                                <img src="img/service/commercial-cleaning.jpg" alt="Entretien commercial complet"
+                                    loading="lazy" width="140" height="140">
                             </div>
                             <h3>Entretien commercial complet</h3>
-                        </div>
-                        <div class="services-item">
+                        </article>
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/butcher-cleaning.jpg" alt="Nettoyage de boucheries">
+                                <img src="img/service/butcher-cleaning.jpg" alt="Nettoyage de boucheries"
+                                    loading="lazy" width="140" height="140">
                             </div>
                             <h3>Nettoyage de boucheries</h3>
-                        </div>
-                        <div class="services-item">
+                        </article>
+                        <article class="services-item">
                             <div class="img-box">
-                                <img src="img/service/fishmarket-cleaning.jpg" alt="Nettoyage de poissonneries">
+                                <img src="img/service/fishmarket-cleaning.jpg" alt="Nettoyage de poissonneries"
+                                    loading="lazy" width="140" height="140">
                             </div>
                             <h3>Nettoyage de poissonneries</h3>
-                        </div>
+                        </article>
                     </div>
                 </div>
 
                 <!-- Navigation du carrousel -->
                 <div class="carousel-nav">
-                    <button class="prev">&lt;</button>
-                    <button class="next">&gt;</button>
+                    <button class="prev" aria-label="Service précédent">&lt;</button>
+                    <button class="next" aria-label="Service suivant">&gt;</button>
                 </div>
             </div>
         </section>
         <!-- services section end -->
 
-        <!-- services section end -->
-
-
-        <!-- pricing section start -->
-        <!-- pricing section end -->
-
-        <!-- team section start -->
-        <!-- team section end -->
-
-
         <!-- contact section start -->
-        <section class="contact section-padding" id="contact">
+        <section class="contact section-padding" id="contact" aria-label="Contact">
             <div class="container">
                 <div class="section-title">
-                    <span class="title">contact & réservation</span>
+                    <span class="title">Réservation & Contact</span>
                     <h2 class="sub-title">contactez-nous</h2>
                 </div>
                 <div class="grid contact-grid">
                     <div class="contact-info">
-                        <div class="contact-form">
+                        <address class="contact-form">
                             <div class="contact-info-item">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                 <h3>Adresse</h3>
                                 <p>8876 Boul. Henri-Bourassa #100, Québec, QC G1G 3W9</p>
                             </div>
                             <div class="contact-info-item">
-                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-phone" aria-hidden="true"></i>
                                 <h3>Appelez-nous</h3>
-                                <p>4185615415</p>
-                                <p>5817773133</p>
+                                <p>(+1) 418 561 5415</p>
+                                <p>(+1) 581 777 3133</p>
                             </div>
                             <div class="contact-info-item">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
                                 <h3>Courriel</h3>
                                 <a
                                     href="mailto:direction@partenaireservicegeneral.com">direction@partenaireservicegeneral.com</a>
 
 
                             </div>
-                        </div>
+                        </address>
                     </div>
                     <div class="contact-form">
-                        <form action="https://formspree.io/f/xdkaznkk" method="POST" class="contact-form" id="my-form">
+                        <form action="https://formspree.io/f/xdkaznkk" method="POST" id="my-form" role="form" aria-label="Formulaire de contact">
                             <!-- Champ anti-spam caché -->
                             <div style="display: none;">
                                 <input type="text" name="_gotcha">
                             </div>
-                            <input type="hidden" name="_subject" value="Nouveau message depuis le site web">
+                            <input type="hidden" name="_subject" value="Nouveau message depuis Partenaire Service Général">
                             <div class="input-box">
                                 <input type="text" name="Nom" placeholder="Nom et Prénom" class="input-control"
                                     required>
@@ -266,7 +259,7 @@
                             </div>
                             <div class="input-box">
                                 <input type="tel" name="Téléphone" placeholder="Téléphone" class="input-control"
-                                    required>
+                                    required pattern="[0-9]{10,15}" inputmode="numeric">
                             </div>
                             <div class="input-box">
                                 <textarea name="Message" placeholder="Message" class="input-control"
@@ -300,44 +293,8 @@
     <!-- page wrapper end -->
 
 
-    <script src="js/main.js"></script>
-
-    <script src="https://kit.fontawesome.com/bf14b68fbc.js" crossorigin="anonymous"></script>
-
-    <script>
-        // Gestion de la soumission du formulaire
-        document.getElementById('my-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const form = e.target;
-            const status = document.getElementById('form-status');
-            const button = form.querySelector('button[type="submit"]');
-
-            button.disabled = true;
-            status.style.display = 'block';
-            status.innerHTML = 'Envoi en cours...';
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    status.innerHTML = 'Message envoyé avec succès !';
-                    form.reset();
-                } else {
-                    status.innerHTML = "Une erreur s'est produite. Veuillez réessayer.";
-                }
-            } catch (error) {
-                status.innerHTML = "Problème de connexion. Vérifiez votre internet.";
-            }
-
-            button.disabled = false;
-            setTimeout(() => { status.style.display = 'none'; }, 5000);
-        });
-    </script>
+    <script src="js/main.js" defer></script>
+    <script src="https://kit.fontawesome.com/bf14b68fbc.js" crossorigin="anonymous" defer></script>
 
 </body>
 

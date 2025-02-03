@@ -1,90 +1,215 @@
-// header bg reveal
+// Constants
+const CAROUSEL_CONFIG = {
+    TRANSITION_DURATION: 600,
+    AUTO_PLAY_INTERVAL: 5000
+};
 
-const headerBg = () => {
-    const header = document.querySelector('.js-header');
+const FORM_CONFIG = {
+    STATUS_DISPLAY_DURATION: 5000,
+    MESSAGES: {
+        SENDING: 'Envoi en cours...',
+        SUCCESS: 'Message envoyé avec succès !',
+        ERROR: "Une erreur s'est produite. Veuillez réessayer.",
+        NETWORK_ERROR: "Problème de connexion. Vérifiez votre internet."
+    }
+};
 
-    window.addEventListener('scroll', function () {
-        if(this.scrollY > 0){
-            header.classList.add("bg-reveal");
-        }else{
-            header.classList.remove("bg-reveal");
-        }
-    });
-}
-headerBg();
-// carousel
-const carousel = () => {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    let currentSlide = 0;
-    let isAnimating = false;
+// Utility Functions
+const debounce = (fn, delay) => {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn(...args), delay);
+    };
+};
 
-    function showSlide(index, direction) {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        // Désactiver les boutons pendant la transition
-        prevBtn.style.pointerEvents = 'none';
-        nextBtn.style.pointerEvents = 'none';
-
-        // Masquer la slide actuelle
-        slides[currentSlide].classList.remove('active');
-        
-        // Gérer l'index des slides
-        if (index >= slides.length) currentSlide = 0;
-        else if (index < 0) currentSlide = slides.length - 1;
-        else currentSlide = index;
-
-        // Afficher la nouvelle slide après un délai
-        setTimeout(() => {
-            slides[currentSlide].classList.add('active');
-            isAnimating = false;
-            prevBtn.style.pointerEvents = 'auto';
-            nextBtn.style.pointerEvents = 'auto';
-        }, 600); // Doit correspondre à la durée de la transition CSS
+// Header Component
+class Header {
+    constructor() {
+        this.header = document.querySelector('.js-header');
+        this.init();
     }
 
-    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1, 'prev'));
-    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1, 'next'));
+    init() {
+        this.handleScroll = debounce(() => {
+            this.header.classList.toggle('bg-reveal', window.scrollY > 0);
+        }, 100);
 
-    // Initialisation
-    slides[currentSlide].classList.add('active');
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    destroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
 }
 
-// Initialiser le carrousel au chargement
-document.addEventListener('DOMContentLoaded', carousel);
+// Carousel Component
+class Carousel {
+    constructor(element) {
+        this.element = element;
+        this.slides = element.querySelectorAll('.carousel-slide');
+        this.prevBtn = element.querySelector('.prev');
+        this.nextBtn = element.querySelector('.next');
+        this.currentSlide = 0;
+        this.isAnimating = false;
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.element || this.slides.length === 0) return;
+        
+        this.showSlide(this.currentSlide);
+        this.bindEvents();
+        this.setupTouchEvents();
+        this.setupResizeHandler();
+    }
+    
+    bindEvents() {
+        this.prevBtn?.addEventListener('click', () => this.navigate(-1));
+        this.nextBtn?.addEventListener('click', () => this.navigate(1));
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.navigate(-1);
+            if (e.key === 'ArrowRight') this.navigate(1);
+        });
+    }
+    
+    setupTouchEvents() {
+        this.element.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        this.element.addEventListener('touchend', (e) => {
+            this.touchEndX = e.changedTouches[0].clientX;
+            this.handleSwipe();
+        }, { passive: true });
+    }
+    
+    handleSwipe() {
+        const swipeThreshold = 50; // minimum distance for swipe
+        const diff = this.touchStartX - this.touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                this.navigate(1); // Swipe left, go next
+            } else {
+                this.navigate(-1); // Swipe right, go previous
+            }
+        }
+    }
+    
+    setupResizeHandler() {
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                this.adjustHeight();
+            }, 250);
+        });
+    }
+    
+    adjustHeight() {
+        const activeSlide = this.slides[this.currentSlide];
+        if (activeSlide) {
+            this.element.style.height = `${activeSlide.offsetHeight}px`;
+        }
+    }
+    
+    navigate(direction) {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        this.toggleControls(false);
+        
+        const nextIndex = this.getNextIndex(this.currentSlide + direction);
+        this.slides[this.currentSlide].classList.remove('active');
+        
+        setTimeout(() => {
+            this.slides[nextIndex].classList.add('active');
+            this.currentSlide = nextIndex;
+            this.isAnimating = false;
+            this.toggleControls(true);
+            this.adjustHeight();
+        }, 400); // Match this with CSS transition duration
+    }
+    
+    getNextIndex(index) {
+        const length = this.slides.length;
+        return ((index % length) + length) % length;
+    }
+    
+    toggleControls(enabled) {
+        const pointerEvents = enabled ? 'auto' : 'none';
+        [this.prevBtn, this.nextBtn].forEach(btn => {
+            if (btn) btn.style.pointerEvents = pointerEvents;
+        });
+    }
+    
+    showSlide(index) {
+        if (this.isAnimating) return;
+        
+        this.slides[this.currentSlide].classList.remove('active');
+        this.slides[index].classList.add('active');
+        this.currentSlide = index;
+        this.adjustHeight();
+    }
+}
 
-//mail form
-    document.getElementById('my-form').addEventListener('submit', async (e) => {
+// Contact Form Component
+class ContactForm {
+    constructor(formId) {
+        this.form = document.getElementById(formId);
+        this.status = document.getElementById('form-status');
+        this.submitButton = this.form?.querySelector('button[type="submit"]');
+        
+        if (this.form) this.init();
+    }
+
+    init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    async handleSubmit(e) {
         e.preventDefault();
 
-        const form = e.target;
-        const status = document.getElementById('form-status');
-        const button = form.querySelector('button[type="submit"]');
-
-        button.disabled = true;
-        status.style.display = 'block';
-        status.innerHTML = 'Envoi en cours...';
+        // Ensure status element exists and is visible
+        if (!this.status) return;
+        
+        this.submitButton.disabled = true;
+        this.status.style.display = 'block';
+        this.status.innerHTML = FORM_CONFIG.MESSAGES.SENDING;
 
         try {
-            const response = await fetch(form.action, {
+            const response = await fetch(this.form.action, {
                 method: 'POST',
-                body: new FormData(form),
+                body: new FormData(this.form),
                 headers: { 'Accept': 'application/json' }
             });
 
             if (response.ok) {
-                status.innerHTML = 'Message envoyé avec succès ! Nous vous répondrons bientôt.';
-                form.reset(); // Reset form fields
+                this.status.innerHTML = FORM_CONFIG.MESSAGES.SUCCESS;
+                this.form.reset();
             } else {
-                status.innerHTML = "Une erreur s'est produite. Veuillez réessayer.";
+                this.status.innerHTML = FORM_CONFIG.MESSAGES.ERROR;
             }
         } catch (error) {
-            status.innerHTML = "Problème de connexion. Vérifiez votre internet.";
+            this.status.innerHTML = FORM_CONFIG.MESSAGES.NETWORK_ERROR;
+        } finally {
+            this.submitButton.disabled = false;
+            setTimeout(() => {
+                this.status.style.display = 'none';
+            }, FORM_CONFIG.STATUS_DISPLAY_DURATION);
         }
+    }
+}
 
-        button.disabled = false;
-        setTimeout(() => { status.style.display = 'none'; }, 5000);
-    });
-
+// Initialize all components when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const header = new Header();
+    const carousel = new Carousel(document.querySelector('.carousel'));
+    const contactForm = new ContactForm('my-form');
+});
