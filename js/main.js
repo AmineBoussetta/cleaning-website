@@ -206,9 +206,50 @@ class ContactForm {
         }
     }
 }
+//nav toggler
+class MobileMenu {
+    constructor() {
+        this.toggler = document.querySelector('.js-nav-toggler');
+        this.nav = document.querySelector('.js-nav');
+        this.body = document.body;
+        this.init();
+    }
+
+    init() {
+        this.toggler.addEventListener('click', () => this.toggleMenu());
+        this.nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => this.closeMenu());
+        });
+        document.addEventListener('click', (e) => this.handleOutsideClick(e));
+    }
+
+    toggleMenu() {
+        this.toggler.classList.toggle('active');
+        this.nav.classList.toggle('active');
+        this.body.classList.toggle('menu-open');
+        const isExpanded = this.toggler.getAttribute('aria-expanded') === 'true';
+        this.toggler.setAttribute('aria-expanded', !isExpanded);
+    }
+
+    closeMenu() {
+        this.toggler.classList.remove('active');
+        this.nav.classList.remove('active');
+        this.body.classList.remove('menu-open');
+        this.toggler.setAttribute('aria-expanded', 'false');
+    }
+
+    handleOutsideClick(e) {
+        if (this.nav.classList.contains('active') && 
+            !this.nav.contains(e.target) && 
+            !this.toggler.contains(e.target)) {
+            this.closeMenu();
+        }
+    }
+}
 
 // Initialize all components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    new MobileMenu();
     const header = new Header();
     const carousel = new Carousel(document.querySelector('.carousel'));
     const contactForm = new ContactForm('my-form');

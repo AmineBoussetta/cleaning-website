@@ -275,8 +275,42 @@
     .nav a:hover{
         color: var(--main-color);
     }
-    .nav-toggler{
-        display: none;
+    .nav-toggler {
+        display: none; /* Hidden by default */
+        width: 35px;
+        height: 24px;
+        position: relative;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 9999;
+    }
+    
+    .nav-toggler span {
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: var(--main-color);
+        left: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-toggler span:nth-child(1) { top: 0; }
+    .nav-toggler span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .nav-toggler span:nth-child(3) { bottom: 0; }
+    
+    .nav-toggler.active span:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+    
+    .nav-toggler.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggler.active span:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
     }
 
     /* home */
@@ -624,24 +658,44 @@
     @media (max-width: 991px) {
         /* Menu mobile */
         .nav-toggler {
-            display: block;
-            z-index: 3;
-        }
+        display: block;
+    }
 
-        .nav {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            right: -100%;
-            top: 0;
-            background: var(--bg-white);
-            padding-top: 80px;
-            transition: 0.5s ease;
-        }
+    .nav {
+        position: fixed;
+        width: 300px;
+        height: 100vh;
+        right: -300px;
+        top: 0;
+        background: var(--bg-white);
+        padding: 80px 30px 30px;
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 9998;
+    }
 
-        .nav.active {
-            right: 0;
-        }
+    .nav.active {
+        right: 0;
+    }
+
+    .nav ul {
+        display: block;
+    }
+
+    .nav li {
+        display: block;
+        margin: 15px 0;
+    }
+
+    .nav a {
+        font-size: 18px;
+        padding: 10px;
+        display: block;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
 
         /* Adaptations générales */
         .grid {
