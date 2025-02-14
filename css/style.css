@@ -496,24 +496,16 @@
         display: flex;
         gap: 15px;
         width: auto;
+
     }
 
     .carousel-nav button {
         pointer-events: auto;
         background-color: var(--main-color);
         color: var(--text-white);
-        border: none;
-        padding: 10px 20px;
-        margin: 0 10px;
-        font-size: var(--fs-md);
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+
     }
 
-    .carousel-nav button:hover {
-        background-color: hsl(var(--hue), var(--saturation), 40%);
-    }
 
     /* contact */
 
