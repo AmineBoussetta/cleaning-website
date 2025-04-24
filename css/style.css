@@ -106,7 +106,7 @@
     ::-webkit-scrollbar-track{
         background-color: var(--body-bg-color);
     }
-    ::-webkit-scrollbar-thumn{
+    ::-webkit-scrollbar-thumb{
         background-color: var(--main-color);
     }
 
@@ -312,6 +312,31 @@
         bottom: 50%;
         transform: translateY(50%) rotate(-45deg);
     }
+
+    #language-switcher {
+        display: inline-block;
+  margin-left: var(--spacing-large);
+  margin-right: 0;
+      }
+      
+      #lang-toggle {
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-dark-gray);
+        font-family: 'Poppins', sans-serif;
+        font-size: var(--fs-md);
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      
+      #lang-toggle:hover,
+      #lang-toggle:focus {
+        border-color: var(--main-color);
+      }
+      
 
     /* home */
     .home {
@@ -636,6 +661,7 @@
         font-size: var(--fs-xl);
         font-weight: 500;
     }
+    
 
     /* responsive */
     @media (max-width: 1200px) {
@@ -651,6 +677,10 @@
         /* Menu mobile */
         .nav-toggler {
         display: block;
+    }
+    #language-switcher {
+        display: inline-block;
+        margin-right: var(--spacing-large);
     }
 
     .nav {
@@ -688,8 +718,6 @@
     body.menu-open {
         overflow: hidden;
     }
-
-        /* Adaptations générales */
         .grid {
             grid-template-columns: repeat(1, 1fr);
         }
@@ -697,9 +725,9 @@
         .about-img,
         .about-text {
             grid-column: span 12;
+            margin: 25px;
         }
 
-        /* Spécialités */
         .specialty-item {
             grid-column: span 12;
             margin-bottom: 30px;
@@ -711,6 +739,27 @@
         .carousel {
             min-height: 565px;
         }
+
+        .btn-wrap {
+            display: flex;
+            justify-content: center;
+        }
+        .contact-info {
+            text-align: center; /* Centre le texte */
+        }
+    
+        .contact-info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centre les éléments */
+            padding-left: 0; /* Supprime le décalage gauche */
+        }
+    
+        .contact-info-item i {
+            position: static; /* Supprime la position absolue */
+            margin-bottom: 10px; /* Ajoute un peu d'espace sous l'icône */
+        }
+
     }
 
     @media (max-width: 768px) {

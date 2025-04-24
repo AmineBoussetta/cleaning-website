@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Partenaire Service Général Inc. offre des services d’entretien ménager commercial adaptés, basés sur des standards de qualité supérieure. Découvrez nos solutions à Québec et ses environs.">
+        content="Partenaire Service Général Inc. offre des services d’entretien ménager commercial adaptés, basés sur des standards de qualité supérieure.">
     <meta name="keywords"
         content="entretien ménager, nettoyage commercial, services de nettoyage, Québec, nettoyage bureaux, nettoyage résidentiel">
     <meta name="author" content="Partenaire Service Général Inc.">
-
     <link rel="icon" type="image/png" href="img/favicon-logo-mehdi.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha384-d02d1f2608b3db7db67b2731b57e98725c376b02fb7f4e6b29c6b02a8d01a9f7" crossorigin="anonymous">
-
     <title>Partenaire Service Général | Services d'Entretien Ménager</title>
 </head>
 
@@ -27,6 +25,9 @@
                 <div class="logo">
                     <img src="img/logo-mehdi.png" alt="cleaning service logo" loading="lazy">
                 </div>
+                <!-- Sélecteur de langue -->
+                
+
                 <button type="button" class="nav-toggler js-nav-toggler" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -34,34 +35,36 @@
                 </button>
                 <nav class="nav js-nav">
                     <ul>
-                        <li><a href="#home">Accueil</a></li>
-                        <li><a href="#about">À propos</a></li>
-                        <li><a href="#specialty">Expertises</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Réservation & Contact</a></li>
+                        <li><a href="#home" data-i18n="nav.home">Accueil</a></li>
+                        <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+                        <li><a href="#specialty" data-i18n="nav.specialty">Expertises</a></li>
+                        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Réservation &amp; Contact</a></li>
+                        <li id="language-switcher">
+                            <button id="lang-toggle" class="btn" aria-label="Changer la langue">Français</button>
+                          </li>
                     </ul>
                 </nav>
+                <!-- Nouveau bouton toggle langue -->
             </div>
         </header>
         <!-- header end -->
-
 
         <!-- home section start -->
         <section class="home" id="home" aria-label="Accueil">
             <div class="container">
                 <div class="home-text">
-                    <h1>Des solutions de nettoyage adaptées aux grandes entreprises</h1>
-                    <p>Spécialisés dans l'entretien des centres commerciaux, magasins, usines et grandes surfaces,
-                        nous garantissons des espaces impeccables et une qualité irréprochable.</p>
-                    <p>Nous offrons également des services de nettoyage résidentiel pour répondre à tous vos
-                        besoins.</p>
+                    <h1 data-i18n="home.title">Des solutions de nettoyage adaptées aux grandes entreprises</h1>
+                    <p data-i18n="home.text1">Spécialisés dans l'entretien des centres commerciaux, magasins, usines et
+                        grandes surfaces, nous garantissons des espaces impeccables et une qualité irréprochable.</p>
+                    <p data-i18n="home.text2">Nous offrons également des services de nettoyage résidentiel pour répondre
+                        à tous vos besoins.</p>
                     <div class="btn-wrap">
-                        <a href="#contact" class="btn">Réserver un rendez-vous</a>
+                        <a href="#contact" class="btn" data-i18n="home.btn">Réserver un rendez-vous</a>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- home section end -->
 
         <!-- about section start -->
@@ -72,17 +75,20 @@
                         <div class="img-box">
                             <img src="img/about-img.png" alt="Notre équipe de nettoyage au travail" loading="lazy"
                                 width="400" height="400">
-                            
                         </div>
                     </div>
                     <div class="about-text">
                         <div class="section-title">
-                            <span class="title">à propos</span>
-                            <h2 class="sub-title">Une expertise bâtie au fil des années</h2>
+                            <span class="title" data-i18n="about.title">à propos</span>
+                            <h2 class="sub-title" data-i18n="about.subtitle">Une expertise bâtie au fil des années</h2>
                         </div>
-                        <p>Forts d’une longue expérience, nous sommes experts dans l'entretien des grandes entreprises : centres commerciaux, usines, épiceries, et bien plus. Notre mission est de garantir un environnement propre et accueillant pour vos clients et employés.</p> 
-                        <p>Nous utilisons des équipements modernes pour offrir un nettoyage efficace et respectueux des normes environnementales.</p>
-                    </div>                    
+                        <p data-i18n="about.text1">Forts d’une longue expérience, nous sommes experts dans l'entretien
+                            des grandes entreprises : centres commerciaux, usines, épiceries, et bien plus. Notre
+                            mission est de garantir un environnement propre et accueillant pour vos clients et employés.
+                        </p>
+                        <p data-i18n="about.text2">Nous utilisons des équipements modernes pour offrir un nettoyage
+                            efficace et respectueux des normes environnementales.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -92,8 +98,8 @@
         <section class="specialty section-padding" id="specialty">
             <div class="container">
                 <div class="section-title">
-                    <span class="title">spécialités</span>
-                    <h2 class="sub-title">notre expertise</h2>
+                    <span class="title" data-i18n="specialty.title">spécialités</span>
+                    <h2 class="sub-title" data-i18n="specialty.subtitle">notre expertise</h2>
                 </div>
                 <div class="grid">
                     <!-- specialty item start -->
@@ -101,7 +107,7 @@
                         <div class="img-box">
                             <img src="img/office.jpg" alt="office cleaning" loading="lazy">
                         </div>
-                        <h3>bureautique</h3>
+                        <h3 data-i18n="specialty.office">bureautique</h3>
                     </div>
                     <!-- specialty item end -->
                     <!-- specialty item start -->
@@ -109,7 +115,7 @@
                         <div class="img-box">
                             <img src="img/commercial.jpg" alt="commercial cleaning" loading="lazy">
                         </div>
-                        <h3>commercialle</h3>
+                        <h3 data-i18n="specialty.commercial">commercialle</h3>
                     </div>
                     <!-- specialty item end -->
                     <!-- specialty item start -->
@@ -117,7 +123,7 @@
                         <div class="img-box">
                             <img src="img/residential.jpg" alt="residential cleaning" loading="lazy">
                         </div>
-                        <h3>résidentielle</h3>
+                        <h3 data-i18n="specialty.residential">résidentielle</h3>
                     </div>
                     <!-- specialty item end -->
                 </div>
@@ -129,8 +135,8 @@
         <section class="services section-padding" id="services" aria-label="Nos services">
             <div class="carousel" role="region" aria-label="Carrousel des services">
                 <div class="section-title">
-                    <span class="title">services</span>
-                    <h2 class="sub-title">nos services</h2>
+                    <span class="title" data-i18n="services.title">services</span>
+                    <h2 class="sub-title" data-i18n="services.subtitle">nos services</h2>
                 </div>
 
                 <!-- Slide 1 -->
@@ -143,32 +149,31 @@
                                         alt="Service d'entretien ménager régulier" loading="lazy" width="140"
                                         height="140">
                                 </div>
-                                <h3>Entretien ménager régulier</h3>
+                                <h3 data-i18n="services.regular">Entretien ménager régulier</h3>
                             </article>
                             <article class="services-item">
                                 <div class="img-box">
                                     <img src="img/service/window-cleaning.jpg" alt="Lavage de vitres" loading="lazy"
                                         width="140" height="140">
                                 </div>
-                                <h3>Lavage de vitres</h3>
+                                <h3 data-i18n="services.windows">Lavage de vitres</h3>
                             </article>
                             <article class="services-item">
                                 <div class="img-box">
                                     <img src="img/service/parking-cleaning.jpg" alt="Nettoyage de parkings"
                                         loading="lazy" width="140" height="140">
                                 </div>
-                                <h3>Nettoyage de parkings</h3>
+                                <h3 data-i18n="services.parking">Nettoyage de parkings</h3>
                             </article>
                             <article class="services-item">
                                 <div class="img-box">
                                     <img src="img/service/carpet-cleaning.jpg" alt="Lavage de tapis" loading="lazy"
                                         width="140" height="140">
                                 </div>
-                                <h3>Lavage de tapis</h3>
+                                <h3 data-i18n="services.carpet">Lavage de tapis</h3>
                             </article>
                         </div>
                     </div>
-
 
                     <!-- Slide 2 -->
                     <div class="carousel-slide" role="group" aria-label="2 of 2">
@@ -178,28 +183,28 @@
                                     <img src="img/service/decapage-serrage.jpg" alt="Décapage et cirage" loading="lazy"
                                         width="140" height="140">
                                 </div>
-                                <h3>Décapage et cirage</h3>
+                                <h3 data-i18n="services.decapage">Décapage et cirage</h3>
                             </article>
                             <article class="services-item">
                                 <div class="img-box">
                                     <img src="img/service/commercial-cleaning.jpg" alt="Entretien commercial complet"
                                         loading="lazy" width="140" height="140">
                                 </div>
-                                <h3>Entretien commercial complet</h3>
+                                <h3 data-i18n="services.commercial_cleaning">Entretien commercial complet</h3>
                             </article>
                             <article class="services-item">
                                 <div class="img-box">
                                     <img src="img/service/butcher-cleaning.jpg" alt="Nettoyage de boucheries"
                                         loading="lazy" width="140" height="140">
                                 </div>
-                                <h3>Nettoyage de boucheries</h3>
+                                <h3 data-i18n="services.butcher">Nettoyage de boucheries</h3>
                             </article>
                             <article class="services-item">
                                 <div class="img-box">
                                     <img src="img/service/fishmarket-cleaning.jpg" alt="Nettoyage de poissonneries"
                                         loading="lazy" width="140" height="140">
                                 </div>
-                                <h3>Nettoyage de poissonneries</h3>
+                                <h3 data-i18n="services.fishmarket">Nettoyage de poissonneries</h3>
                             </article>
                         </div>
                     </div>
@@ -218,30 +223,29 @@
         <section class="contact section-padding" id="contact" aria-label="Contact">
             <div class="container">
                 <div class="section-title">
-                    <span class="title">Réservation & Contact</span>
-                    <h2 class="sub-title">contactez-nous</h2>
+                    <span class="title" data-i18n="contact.title">Réservation &amp; Contact</span>
+                    <h2 class="sub-title" data-i18n="contact.subtitle">contactez-nous</h2>
                 </div>
                 <div class="grid contact-grid">
                     <div class="contact-info">
                         <div class="contact-form">
                             <div class="contact-info-item">
                                 <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                                <h3>Adresse</h3>
-                                <p>8876 Boul. Henri-Bourassa #100, Québec, QC G1G 3W9</p>
+                                <h3 data-i18n="contact.address.title">Adresse</h3>
+                                <p data-i18n="contact.address.text">8876 Boul. Henri-Bourassa #100, Québec, QC G1G 3W9
+                                </p>
                             </div>
                             <div class="contact-info-item">
                                 <i class="fas fa-phone" aria-hidden="true"></i>
-                                <h3>Appelez-nous</h3>
-                                <p>(+1) 418 561 5415</p>
-                                <p>(+1) 581 777 3133</p>
+                                <h3 data-i18n="contact.phone.title">Appelez-nous</h3>
+                                <p data-i18n="contact.phone.number1">(+1) 418 561 5415</p>
+                                <p data-i18n="contact.phone.number2">(+1) 581 777 3133</p>
                             </div>
                             <div class="contact-info-item">
                                 <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <h3>Courriel</h3>
-                                <a
-                                    href="mailto:direction@partenaireservicegeneral.com">direction@partenaireservicegeneral.com</a>
-
-
+                                <h3 data-i18n="contact.email.title">Courriel</h3>
+                                <a href="mailto:direction@partenaireservicegeneral.com"
+                                    data-i18n="contact.email.link">direction@partenaireservicegeneral.com</a>
                             </div>
                         </div>
                     </div>
@@ -255,25 +259,25 @@
                             <input type="hidden" name="_subject"
                                 value="Nouveau message depuis Partenaire Service Général">
                             <div class="input-box">
-                                <input type="text" name="Nom" placeholder="Nom et Prénom" class="input-control"
-                                    required>
+                                <input type="text" name="Nom" placeholder="Nom et Prénom" class="input-control" required
+                                    data-i18n-placeholder="form.name">
                             </div>
                             <div class="input-box">
-                                <input type="email" name="Email" placeholder="Email" class="input-control" required>
+                                <input type="email" name="Email" placeholder="Email" class="input-control" required
+                                    data-i18n-placeholder="form.email">
                             </div>
                             <div class="input-box">
                                 <input type="number" name="Téléphone" placeholder="Téléphone" class="input-control"
-                                required>
+                                    required data-i18n-placeholder="form.phone">
                             </div>
                             <div class="input-box">
-                                <textarea name="Message" placeholder="Message" class="input-control"
-                                    required></textarea>
+                                <textarea name="Message" placeholder="Message" class="input-control" required
+                                    data-i18n-placeholder="form.message"></textarea>
                             </div>
                             <div class="btn-wrap">
-                                <button type="submit" class="btn">Envoyer le message</button>
+                                <button type="submit" class="btn" data-i18n="form.submit">Envoyer le message</button>
                             </div>
                         </form>
-
                         <div id="form-status" style="display: none;"></div>
                     </div>
                 </div>
@@ -284,7 +288,7 @@
         <!-- footer start -->
         <footer class="footer">
             <div class="container">
-                <h3>suivez-nous</h3>
+                <h3 data-i18n="footer.follow">suivez-nous</h3>
                 <div class="social-links">
                     <a href="#" title="facebook"><i class="fab fa-facebook"></i></a>
                     <a href="#" title="twitter"><i class="fab fa-twitter"></i></a>
@@ -296,10 +300,8 @@
     </div>
     <!-- page wrapper end -->
 
-
     <script src="js/main.js" defer></script>
     <script src="https://kit.fontawesome.com/bf14b68fbc.js" crossorigin="anonymous" defer></script>
-
 </body>
 
 </html>
